@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>iLabTDI</title>
+    <!-- Bootstrap -->
+    <link href="./stylesheets/bootstrap-4.4.1.css" rel="stylesheet">
+  </head>
+  <body class="blue">
+	{{!-- Menu --}}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" id="top" href="#">iLabTDI |</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item.active"> <a class="nav-link active" href="#">¿Quienes somos?</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="/eventos">Eventos</a> </li>
+		  <li class="nav-item"> <a class="nav-link" href="/proyectos">Proyectos</a> </li>
+		  <li class="nav-item"> <a class="nav-link" href="#facebook">Facebook</a> </li>
+		  <li class="nav-item"> <a class="nav-link" href="#twitter">Twitter</a> </li>
+		  <li class="nav-item"> <a class="nav-link" href="#youtube">Youtube</a> </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Servicios </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/photos">Galeria</a> 
+			  <a class="dropdown-item" href="/perfiles">Nosotros</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Contacto</a> 
+            </div>
+          </li>
+          <li class="nav-item"> <a class="nav-link disabled" href="#">-</a> </li>
+        </ul>
+		{{!-- revisa si el usuario esta logeado --}}
+		{{!-- En caso de estar logeado da la opcion de cerrar sesion --}}
+		{{#if check }}
+			<ul class="nav">
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{email}} </a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="/logout">Log out</a> 
+					</div>
+				</li>
+			</ul>
+		{{!-- En caso de no estar logeado da la opcion de login o registrarse --}}
+		{{ else }} 
+			<ul class="nav">
+				<li>
+				  <a class="dropdown-item" href="/login">Login</a>
+				</li>
+				<li>
+				  <a class="dropdown-item" href="/register">Register</a>
+				</li>
+			</ul>
+		{{/if}}
+      </div>
+    </nav>
+    <header>
+      <div class="jumbotron">
+        <div class="container">
+          <div class="row">
+			{{!-- Titulo e carrusel de imagenes --}}
+            <div class="col-12">
+              <h1 class="text-center title3">iLabTDI</h1>
+              <p class="text-center">Integration Laboratory for Technological Development and Innovation</p>
+              <p>&nbsp;</p>
+			  <div class="slideshow-container">
+
+				<div class="mySlides fade">
+				  <div class="numbertext">1 / 3</div>
+				  <img src="images/papirolas-17-centros-universitarios-y-coordinaciones-ii.jpg" style="width:100%">
+				  <div class="text">Caption Text</div>
+				</div>
+
+				<div class="mySlides fade">
+				  <div class="numbertext">2 / 3</div>
+				  <img src="images/banners_red_elecciones_1200x448.jpg" style="width:100%">
+				  <div class="text">Caption Two</div>
+				</div>
+
+				<div class="mySlides fade">
+				  <div class="numbertext">3 / 3</div>
+				  <img src="images/bannersweb1-seguridad_1200x448.jpg" style="width:100%">
+				  <div class="text">Caption Three</div>
+				</div>
+
+				<a class="prev" onclick="plusSlides(-1)">❮</a>
+				<a class="next" onclick="plusSlides(1)">❯</a>
+
+				</div>
+				<br>
+
+				<div style="text-align:center">
+				  <span class="dot" onclick="currentSlide(1)"></span> 
+				  <span class="dot" onclick="currentSlide(2)"></span> 
+				  <span class="dot" onclick="currentSlide(3)"></span> 
+				</div>
+
+				<script>
+				let slideIndex = 0;
+				showSlides();
+
+				function showSlides() {
+				  let i;
+				  let slides = document.getElementsByClassName("mySlides");
+				  let dots = document.getElementsByClassName("dot");
+				  for (i = 0; i < slides.length; i++) {
+					slides[i].style.display = "none";  
+				  }
+				  slideIndex++;
+				  if (slideIndex > slides.length) {slideIndex = 1}    
+				  for (i = 0; i < dots.length; i++) {
+					dots[i].className = dots[i].className.replace(" active", "");
+				  }
+				  slides[slideIndex-1].style.display = "block";  
+				  dots[slideIndex-1].className += " active";
+				  setTimeout(showSlides, 5000); // Change image every 5 seconds
+				}
+				</script>
+            </div>
+          </div>
+        </div>
+		{{!-- Boton para ir a la galeria --}}
+		<div class="container">
+			<p href="/photos" class="align-content-center">
+				<button href="/photos" type="button" class="block">
+					<a href="/photos" style="color: white;">Galeria</a>
+				</button> 
+			</p>
+		</div>
+      </div>
+    </header>
+    <section>
+		{{!-- Mision --}}
+		<div class="container align-content-center shadow-div">
+			  <div class="container">
+				<div class="row">
+				  <div class="col-lg-12 mb-4 mt-2 text-center">
+					<h2>Mision</h2>
+				  </div>
+				</div>
+			  </div>
+			  <div class="text-center">
+				 <p>Somos un laboratorio creado para fomentar e impulsar la creación de proyectos que involucren la tecnología y que al mismo tiempo sean innovadores, nuestra misión es que estos no solo queden como una idea más, si no que se lleven a cabo; Somos una organización que une esfuerzos tanto de estudiantes como de docentes para poder llevar a cabo estas ideas y pretendemos inspirar a las personas con historias de éxito sobre gente que llevo a cabo su idea o proyecto</p>
+				 <p>Creemos que como ingenieros no solo tenemos que desarrollar lo que otra persona pensó, sino que nosotros mismos somos capaces de entrar en un proceso creativo e idear un proyecto </p>
+			  </div>
+	  </div>
+	  {{!-- Vision --}}
+      <div class="container align-content-center shadow-div">
+		<div class="text-center">
+		  <div class="col-sm-12 mt-4 mb-2 text-center">
+			<h2>Vision</h2>
+		  </div>
+		</div>
+		<div class="text-center">
+		  <div class="text-center">
+		    <p class="mb-0">Queremos inspirar y motivar a aquellas personas que tienen una idea y que la quieren llevar a cabo y así mismo que aquellos que no tengan un proyecto claro, sino más bien una idea abstracta, sea capaces de aterrizarla y desarrollarla, por otro lado, queremos vincular estos proyectos con las personas y organizaciones correctas para que alcancen todo su potencial</p>
+			<p>De igual forma buscamos abrir el interés y curiosidad por diversos temas que no necesariamente tengan que ver con la tecnología, sino que vayan más allá de eso</p> 
+		  </div>
+		</div>
+      </div>
+	  <div class="greenDiagonal">
+	  </div>
+	  {{!-- boton de registro --}}
+      <div class="jumbotron">
+        <div class="container">
+          <div class="row">
+            <div class="text-center col-md-8 col-12 mx-auto">
+              <p class="lead">Tienes un proyecto y necesitas apoyo, suscribete y nosotros te ayudamos!</p>
+            </div>
+          </div>
+          <div class="text-center">
+            <div class="col-sm-4 col-auto mx-auto"> <a class="btn btn-warning" href="/register" title="">Registrate!</a> </div>
+          </div>
+        </div>
+      </div>
+	  {{!-- Servicios --}}
+      <div class="container">
+        <div class="row align-content-center">
+          <div class="col-12 mb-2 text-center">
+            <h2>Nuestros servicios</h2>
+          </div>
+        </div>
+        <div class="row">
+		  <div class="flip-card align-content-center col-lg-4 col-md-6 col-sm-12 text-center">
+			{{!-- galeria --}}
+			<div class="flip-card-inner">
+			    <div class="flip-card-front">
+				  <h3>Galeria</h3>
+				  <img class="round" src="images/logos/gale.png" style="width: 120px;" alt="user" />
+				</div>
+				<div class="flip-card-back">
+				  <h1>Galeria</h1>
+				  <p>Presencia nuestro trabajo</p>
+				  <p>y el detras de escenas de este.</p>
+				  <p><a class="btn btn-link" style="color: white;" href="/photos">Ver detalles »</a></p>
+				</div>
+			 </div>
+		  </div>
+		  {{!-- nosotros --}}
+          <div class="flip-card align-content-center col-lg-4 col-md-6 col-sm-12 text-center">
+			 <div class="flip-card-inner">
+			    <div class="flip-card-front">
+				  <h3>Nosotros</h3>
+				  <img class="round" src="images/logos/nosotros.png" style="width: 120px;" alt="user" />
+				</div>
+				<div class="flip-card-back">
+				  <h1>Nosotros</h1>
+				  <p>Conoce las personas detras de este proyecto</p>
+				  <p>Conoce nuesra experiencia y contactanos</p>
+				  <p><a class="btn btn-link" style="color: white;" href="/perfiles">Ver detalles »</a></p>
+				</div>
+			 </div>
+		  </div>
+		  {{!-- Eventos --}}
+          <div class="flip-card align-content-center col-lg-4 col-md-6 col-sm-12 text-center">
+			 <div class="flip-card-inner">
+			    <div class="flip-card-front">
+				  <h3>Eventos</h3>
+				  <img class="round" src="images/logos/eventos.png" style="width: 120px;" alt="user" />
+				</div>
+				<div class="flip-card-back">
+				  <h1>Eventos</h1>
+				  <p>Enterate de nuestros proximos eventos</p>
+				  <p>y los detalles de cada uno.</p>
+				  <p><a class="btn btn-link" style="color: white;" href="/eventos">Ver detalles »</a></p>
+				</div>
+			 </div>
+		  </div>
+		  {{!-- youtube --}}
+          <div class="flip-card align-content-center col-lg-4 col-md-6 col-sm-12 text-center">
+			 <div class="flip-card-inner">
+			    <div class="flip-card-front">
+				  <h3>Youtube</h3>
+				  <img class="round" src="images/logos/youtube.png" style="width: 120px;" alt="user" />
+				</div>
+				<div class="flip-card-back">
+				  <h1>Youtube</h1>
+				  <p>Da un vistaso a nuestro youtube</p>
+				  <p><a class="btn btn-link" style="color: white;" href="#youtube">Ir a contenido »</a></p>
+				</div>
+			 </div>
+		  </div>
+		  {{!-- redes sociales --}}
+          <div class="flip-card align-content-center col-lg-4 col-md-6 col-sm-12 text-center">
+			 <div class="flip-card-inner">
+			    <div class="flip-card-front">
+				  <h3>Redes sociales</h3>
+				  <img class="round" src="images/logos/redes.png" style="width: 120px;" alt="user" />
+				</div>
+				<div class="flip-card-back">
+				  <h1>Redes sociales</h1>
+				  <p>Conoce nuestras redes sociales</p>
+				  <p>y el contenido que tenemos en ellas.</p>
+				  <p><a class="btn btn-link" style="color: white;" href="#redes">Ver detalles »</a></p>
+				</div>
+			 </div>
+		  </div>
+		  {{!-- proyectos --}}
+          <div class="flip-card align-content-center col-lg-4 col-md-6 col-sm-12 text-center">
+			 <div class="flip-card-inner">
+			    <div class="flip-card-front">
+				  <h3>Proyectos</h3>
+				  <img class="round" src="images/logos/work.png" style="width: 120px;" alt="user" />
+				</div>
+				<div class="flip-card-back">
+				  <h1>Proyectos</h1>
+				  <p>Conoce los proyectos en</p>
+				  <p>los que estamos o hemos trabajado</p>
+				  <p><a class="btn btn-link" style="color: white;" href="proyectos">Ver detalles »</a></p>
+				</div>
+			 </div>
+		  </div>
+		  <div class="whiteDiagonal"></div>
+        </div>
+      </div>
+    </section>
+	{{!-- Valores --}}
+	<div class="jumbotron">
+        <div class="container">
+		  <div class="text-center">
+            <h2>Valores</h2>
+          </div>
+          <div class="row">
+			{{!-- Valentia --}}
+            <div class="col-lg-4 col-md-6 col-sm-12 text-center">
+              <img class="rounded-circle" alt="140x140" style="width: 140px; height: 140px;" src="images/bravery_200415_111913.svg" data-holder-rendered="true">
+              <h3>Valentia</h3>
+              <p>Creemos que ser valiente es ser resiliente, persistente y ambicioso.</p>
+            </div>
+			{{!-- comunidad --}}
+		    <div class="col-lg-4 col-md-6 col-sm-12 text-center">
+              <img class="rounded-circle" alt="140x140" style="width: 140px; height: 140px;" src="images/sisterhood_200415_111940.svg" data-holder-rendered="true">
+              <h3>Comunidad</h3>
+              <p>Creemos en unir personas en un ambiente que ayude a mejorar y inspirar los unos a los otros.</p>
+            </div>
+			{{!-- preparacion --}}
+		    <div class="col-lg-4 col-md-6 col-sm-12 text-center">
+              <img class="rounded-circle" alt="140x140" style="width: 140px; height: 140px;" src="images/activism_200415_112001.svg" data-holder-rendered="true">
+              <h3>Preparacion</h3>
+              <p>Creemos que prepararse también es conocer las oportunidades con las que cuentas y que de igual forma explotes el potencial que tienes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+	{{!-- Redes sociales --}}
+    <div class="container blue">
+      <div class="row">
+        <div class="col-12 col-md-8 mx-auto">
+          <div class="jumbotron">
+            <div class="row text-center">
+              <div class="text-center col-12">
+                <h2 id="redes" >¡Nuestras redes sociales!</h2>
+              </div>
+			  <div class="row">
+				{{!-- Facebook --}}
+				<div class="col-12 width = '1000' height='700'">
+                  
+				  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v15.0" nonce="5d9mc4bo"></script>
+				  <div id="facebook" class="fb-page" data-href="https://www.facebook.com/ILabTDI" data-tabs="timeline" data-width="700" data-height="700" data-small-header="false" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/ILabTDI" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/ILabTDI">ILabTDI</a></blockquote></div>
+	
+				</div>
+				{{!-- Twitter --}}
+				<div class="col-12">
+				  <div  id="twitter" class="text-center"> 
+				  <a class="twitter-timeline col-12 text-center"
+				  href="https://twitter.com/iLabTDI"
+				  data-tweet-limit="3"
+				  data-width="700"
+				  data-height="700">
+				  Tweets by @iLabTDI
+				  </a>
+				  <script>window.twttr = (function(d, s, id) {
+				  var js, fjs = d.getElementsByTagName(s)[0],t = window.twttr || {};
+				  if (d.getElementById(id)) return t;
+				  js = d.createElement(s);
+				  js.id = id;
+				  js.src = "https://platform.twitter.com/widgets.js";
+				  fjs.parentNode.insertBefore(js, fjs);
+				
+				  t._e = [];
+				  t.ready = function(f) {t._e.push(f);};
+				
+				  return t;
+				  }(document, "script", "twitter-wjs"));</script>
+				  </div>
+				</div>
+			  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+	{{!-- Youtube --}}
+	<div class="container">
+		<p class="align-content-center">
+		<form id="queryForm">
+			<button id="youtube" type="submit" id="queryFormBtn" class="block btn btn-primary">Click para ver contenido de Youtube</button>
+		</form>
+		</p>
+	</div>
+	<br>
+	<div id="search-results"></div>
+	{{!-- Script para recuperar videos de youtube --}}
+	<script>
+		$(document).ready(function () {
+			let data = {
+				channelId: '',
+			};
+			// On form submit hit the video API
+			$('#queryForm').on('submit', function (e) {
+				e.preventDefault();
+				data.channelId = $('#channelId').val();
+				$('#queryFormBtn').attr('disabled', 'true');
+				fetchVideosApi(data)
+			})
+			function fetchVideosApi(data) {
+				$.ajax({
+					url: '/fetch_videos',
+					type: 'POST',
+					data: {
+						channelId: data.channelId,
+					},
+					dataType: 'json',
+					success: function (msg) {
+						$('#search-results').html(msg.html);
+						$('#queryFormBtn').html('Youtube');
+						$('#queryFormBtn').removeAttr('disabled');
+					},
+					error: function (jqXHR, textStatus) {
+						let responseText = jQuery.parseJSON(jqXHR.responseText);
+					}
+				});
+			}
+		})
+	</script>
+	{{!-- pie de pagina --}}
+    <footer class="text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+			<div class="text-center">
+				<p>Copyright © iLabTDI. All rights reserved.</p>
+				<div class="col-sm-4 col-auto mx-auto"> <a class="btn btn-warning" href="#top" title="">Ir arriba ^</a> </div>
+			</div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+    <script src="js/jquery-3.4.1.min.js"></script> 
+    <!-- Include all compiled plugins (below), or include individual files as needed --> 
+    <script src="js/popper.min.js"></script> 
+    <script src="js/bootstrap-4.4.1.js"></script>
+  </body>
+</html>

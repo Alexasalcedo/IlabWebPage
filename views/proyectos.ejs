@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link href="./stylesheets/bootstrap-4.4.1.css" rel="stylesheet">
+</head>
+<!-- Menu -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">iLabTDI |</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item"> <a class="nav-link" href="/">¿Quienes somos?</a></li>
+        <li class="nav-item"> <a class="nav-link" href="/perfiles">Nosotros</a></li>
+        <li class="nav-item"> <a class="nav-link" href="/photos">Galeria</a></li>
+        <!-- opciones para administrador -->
+        <% if(autorizado == true) { %>
+            <li class="nav-item"> <a class="nav-link" href="/proyectos/nuevo">Nuevo Proyecto</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/integrantes/nuevo">Nuevo Integrante</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/edit_proyectos">Editar Proyecto</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/edit_integrante">Editar Integrante</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/borrar_proyectos">Borrar proyecto</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/borrar_integrante">Borrar Integrante</a></li>
+        <% } %>
+      </ul>
+      <!-- revisa si el usuario esta logueado -->
+      <% if(check == true) { %>
+          <ul class="navbar-nav">
+            <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= email %></a>    
+          </ul>
+      <!-- opciones para usuarios no logueados -->
+      <% } else { %>
+          <ul class="nav">
+              <li>
+                <a class="dropdown-item" href="/login">Login</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/register">Register</a>
+              </li>
+          </ul>
+      <% } %>
+    </div>
+  </nav>
+<body class="gradient-custom3">
+    <div class="content">
+        <h2 class="text_shadows">proyectos</h2>
+    </div>
+    <!-- Revisa si existen proyectos en la base -->
+    <% if(details!=null) { %>
+      <!-- itera entre cada proyecto que existe -->
+        <% details.forEach(function(item){ %>
+          <!-- Ventana -->
+          <div class="scrollbar" id="style-1">
+            <div class="container7">
+              <!-- header de ventana -->
+              <div class="row7">
+                <div class="column7 left7">
+                  <span class="dot7" style="background:#ED594A;"></span>
+                  <span class="dot7" style="background:#FDD800;"></span>
+                  <span class="dot7" style="background:#5AC05A;"></span>
+                </div>
+                <div class="column7 middle7">
+                  <input type="text" value="http://www.iLabTDI.com" disabled>
+                </div>
+                <div class="column7 right7">
+                  <div style="float:right">
+                    <span class="bar7"></span>
+                    <span class="bar7"></span>
+                    <span class="bar7"></span>
+                  </div>
+                </div>
+              </div>
+              <!-- contenido de ventana -->
+              <div class="content7">
+                <!-- Nombre -->
+                <h3>  <%= item.nombre%></h3>
+                <!-- descripcion -->
+                <h5 style="color: rgb(43, 116, 233);">  Descripcion</h5>
+                <p> <%= item.descripcion %></p>
+                <!-- integrantes -->
+                <h6>Integrantes</h6>
+                <% integrantes.forEach(function(integrante){ %>
+                  <!-- revisa los integrantes de ese proyecto -->
+                  <% if(integrante.nombre_proyecto == item.nombre) { %>
+                    <div class="skills">
+                      <!-- revisa que exista foto del integrante -->
+                      <% if (integrante.img){ %>
+                        <img src="./uploads/<%= integrante.img %>" align="right" style="width: 130px; height: 180px; margin-right: 10px;" alt="user" />
+                      <% } %>
+                      <div class="skills">
+                        <!-- nombre -->
+                        <h6 style="color: white;">Nombre:</h6>
+                        <p style="color: white;"><%= integrante.integrante %></p>
+                        <!-- correo -->
+                        <p style="color: white;"><%= integrante.correo %></p>
+                        <!-- carrera -->
+                        <h6 style="color: white;">carrera</h6>
+                        <p style="color: white;"><%= integrante.carrera %></p>
+                      </div>
+                    </div>    
+                  <% } %>
+                <% }) %>  
+                <br>
+              </div>
+          </div>
+          </div>
+          <br>
+        <% }) %>
+    <% } %>
+
+</body>
+</html>

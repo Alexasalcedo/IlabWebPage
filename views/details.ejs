@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="./stylesheets/bootstrap-4.4.1.css" rel="stylesheet">
+</head>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- Menu -->
+    <a class="navbar-brand" href="/">iLabTDI |</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item"> <a class="nav-link" href="/">¿Quienes somos?</a></li>
+        <li class="nav-item"> <a class="nav-link" href="/eventos">Eventos</a></li>
+        <li class="nav-item"> <a class="nav-link" href="/photos">Galeria</a></li>
+        <!-- Opciones de administrador -->
+        <% if(autorizado == true) { %>
+          <li class="nav-item"> <a class="nav-link" href="/perfiles/nuevo">Nuevo Perfil</a></li>
+          <li class="nav-item"> <a class="nav-link" href="/borrar">Borrar Perfil</a></li>
+        <% } %>
+      </ul>
+      <!-- Revisa si el usuario esta logeado -->
+      <% if(check == true) { %>
+          <ul class="navbar-nav">
+            <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= email %></a>    
+          </ul>
+      <!-- Si no esta logeado da opciones de login y register -->
+      <% } else { %>
+          <ul class="nav">
+              <li>
+                <a class="dropdown-item" href="/login">Login</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/register">Register</a>
+              </li>
+          </ul>
+      <% } %>
+    </div>
+  </nav>
+<body class="gradient-custom">
+    <!-- Titulo -->
+    <div class="content">
+        <h2 class="text_shadows">Nosotros</h2>
+    </div>
+    <!-- Tarjeta de usuario -->
+    <ul class="cards">
+      <!-- Revisa que existan perfiles en la base -->
+      <% if(details!=null) { %>
+        <!-- itera entre todos los perfiles de la base -->
+        <% var cont = 0; %>
+        <% details.forEach(function(item){ %>
+          <% if (cont > 4){ %>
+            <br>
+            <% cont = 0; %>
+          <% } %>
+          
+          <li>
+            <a href="" class="card">
+              <!-- Si existe imagen la aplica -->
+              <% if (item.img){ %>
+                <img src="./uploads/<%= item.img %>" class="card__image" alt="" />
+              <!-- Si no existe imagen utiliza una generica -->
+              <% } else { %>
+                <img src="https://i.imgur.com/2DhmtJ4.jpg" class="card__image" alt="" />
+              <% } %>
+              <div class="card__overlay">
+                <div class="card__header">
+                  <svg class="card__arc" xmlns="http://www.w3.org/2000/svg"><path /></svg> 
+                  <!-- imagen pequeña utiliza la misma logica en en la imagen grande -->
+                  <% if (item.img){ %>                    
+                    <img class="card__thumb" src="./uploads/<%= item.img %>" alt="" />
+                  <% } else { %>
+                    <img src="https://i.imgur.com/2DhmtJ4.jpg" class="card__thumb" alt="" />
+                  <% } %>
+                  <div class="card__header-text">
+                    <!-- Nombre, apellido y rol -->
+                    <h3 class="card__title"><%= item.nombre %> <%= item.apellido %> (<%= item.rol %>)</h3>
+                    <!-- email -->
+                    <span class="card__status"><%= item.email%></span>
+                  </div>
+                </div>
+                <!-- carrera -->
+                <p class="card__description">Carrera: <%= item.experiencia %></p>
+                <!-- opinion -->
+                <p class="card__description">Opinion: <%= item.texto %></p>
+              </div>
+            </a>      
+          </li>
+          <% cont = cont + 1; %>
+        <% }) %>
+      <% } %>
+    </ul>
+</body>
+</html>

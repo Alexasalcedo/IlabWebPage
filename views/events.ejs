@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link href="./stylesheets/bootstrap-4.4.1.css" rel="stylesheet">
+</head>
+<!-- Menu -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">iLabTDI |</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item"> <a class="nav-link" href="/">¿Quienes somos?</a></li>
+        <li class="nav-item"> <a class="nav-link" href="/perfiles">Nosotros</a></li>
+        <li class="nav-item"> <a class="nav-link" href="/photos">Galeria</a></li>
+        <!-- opciones para administrador -->
+        <% if(autorizado == true) { %>
+            <li class="nav-item"> <a class="nav-link" href="/eventos/nuevo">Nuevo Eventos</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/borrar_eventos">Borrar Eventos</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/edit_eventos">Editar Eventos</a></li>
+        <% } %>
+      </ul>
+      <!-- revisa si el usuario esta logueado -->
+      <% if(check == true) { %>
+          <ul class="navbar-nav">
+            <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= email %></a>    
+          </ul>
+      <!-- opciones para usuarios no logueados -->
+      <% } else { %>
+          <ul class="nav">
+              <li>
+                <a class="dropdown-item" href="/login">Login</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/register">Register</a>
+              </li>
+          </ul>
+      <% } %>
+    </div>
+  </nav>
+<body class="gradient-custom2">
+    <div class="content">
+        <h2 class="text_shadows">Eventos</h2>
+    </div>
+    <!-- revisa si hay eventos en la base de datos -->
+    <% if(details!=null) { %>
+      <!-- itera entre todos los eventos de la base -->
+        <% details.forEach(function(item){ %>
+          <!-- ventana -->
+            <div class="container7">
+              <!-- header de ventana -->
+              <div class="row7">
+                <div class="column7 left7">
+                  <span class="dot7" style="background:#ED594A;"></span>
+                  <span class="dot7" style="background:#FDD800;"></span>
+                  <span class="dot7" style="background:#5AC05A;"></span>
+                </div>
+                <div class="column7 middle7">
+                  <input type="text" value="http://www.iLabTDI.com" disabled>
+                </div>
+                <div class="column7 right7">
+                  <div style="float:right">
+                    <span class="bar7"></span>
+                    <span class="bar7"></span>
+                    <span class="bar7"></span>
+                  </div>
+                </div>
+              </div>
+              <!-- contenido -->
+              <div class="content7">
+                <!-- revisa que exista imagen para aplicarla -->
+                <% if (item.img){ %>
+                  <img src="./uploads/<%= item.img %>" align="left" style="width: 180px; height: 300px; margin-right: 10px;" alt="user" />
+                <% } %>
+                <!-- tema -->
+                <h3>  <%= item.tema%></h3>
+                <!-- fecha -->
+                <h5 style="color: rgb(43, 116, 233);">  Fecha</h5>
+                <p> <%= item.fecha %></p>
+                <!-- duracion -->
+                <h5 style="color: rgb(43, 116, 233);">  Duracion</h5>
+                <p> <%= item.duracion%></p>
+                <!-- modalidad -->
+                <div class="skills">
+                  <h6 style="color: white;">Modalidad</h6>
+                  <p style="color: white;"><%= item.modalidad %></p>
+                </div>
+                <!-- descripcion -->
+                <div class="skills">
+                  <h6 style="color: white;" >Descripcion</h6>
+                  <p style="color: white;" ><%= item.descripcion %></p>
+                </div> 
+                <br>
+              </div>
+          </div>
+          <br>
+        <% }) %>
+    <% } %>
+
+</body>
+</html>
